@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(
               // builder: (_) => const MyHomePage(title: "IO_ TOPS")
-              builder: (_) => const LoginScreen()
+              builder: (_) => LoginScreen()
 
           )
       );

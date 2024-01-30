@@ -4,10 +4,11 @@ import 'package:ientrance/widgets/button_custom.dart';
 import 'package:ientrance/widgets/text_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+  LoginScreen({super.key});
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
   void loginUserByEmail(){
-    print("Login Button Clicked.");
+    print("Login Button Clicked. ${emailTextController.text}");
   }
   void loginUserByGoogle(){}
   void loginUserByApple(){}
@@ -40,10 +41,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 50,),
                   //username
-                  const CTextBox(hintText: "Email Address", obscureText: false,),
+                  CTextBox(hintText: "Email Address", obscureText: false,controller: emailTextController,),
                   const SizedBox(height: 20,),
                   //password
-                  const CTextBox(hintText: "Password", obscureText: true,),
+                  CTextBox(hintText: "Password", obscureText: true,controller: passwordTextController,),
                   //forget password
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
