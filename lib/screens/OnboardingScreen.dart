@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/Signup.dart';
 import 'package:ientrance/utils/Onboarding_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,8 +103,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //value sets to true on pressing getstarted button
 
             if (!mounted) return;
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => SignUp()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));
           },
           child: Text(
             "Get Started",
