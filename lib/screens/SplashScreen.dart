@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ientrance/main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/screens/LoginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,8 +20,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     Future.delayed(const Duration(seconds: 3), (){
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-              builder: (_) => const MyHomePage(title: "IO_ TOPS"
-              )
+              // builder: (_) => const MyHomePage(title: "IO_ TOPS")
+              builder: (_) => const LoginScreen()
+
           )
       );
     });
