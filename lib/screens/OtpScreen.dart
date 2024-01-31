@@ -78,6 +78,13 @@ class _OtpScreenState extends State<OtpScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: PinCodeTextField(
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(10.6),
+                  fieldHeight: 50,
+                  fieldWidth: 50,
+                  activeFillColor: Colors.black,
+                ),
                 length: 4,
                 onCompleted: (code) => _otp = code,
                 textStyle: TextStyle(fontSize: 20.0),
