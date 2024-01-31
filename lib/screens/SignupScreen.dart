@@ -8,11 +8,14 @@ class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
-  void loginUserByEmail(){
-    print("Login Button Clicked. ${emailTextController.text}");
+  final usernameTextController = TextEditingController();
+  void registerUserByEmail(){
+    print(
+      "Username: ${usernameTextController.text}\n Email: ${emailTextController.text}\nPassword: ${passwordTextController.text}"
+    );
   }
-  void loginUserByGoogle(){}
-  void loginUserByApple(){}
+  void registerUserByGoogle(){}
+  void registerUserByApple(){}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +45,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 50,),
                 //username
-                CTextBox(hintText: "Username", obscureText: false,controller: emailTextController,),
+                CTextBox(hintText: "Username", obscureText: false,controller: usernameTextController,),
                 const SizedBox(height: 20,),
                 //email
                 CTextBox(hintText: "Email Address", obscureText: false,controller: emailTextController,),
@@ -67,7 +70,7 @@ class SignupScreen extends StatelessWidget {
                 // ),
                 const SizedBox(height: 20,),
                 //sign in button.
-                ButtonC(buttonText: 'Register', buttonColor: Colors.black, textColor: Colors.white,onTap: loginUserByEmail,),
+                ButtonC(buttonText: 'Register', buttonColor: Colors.black, textColor: Colors.white,onTap: registerUserByEmail,),
                 //or continue with
                 SizedBox(height: 20,),
                 Padding(
@@ -106,13 +109,13 @@ class SignupScreen extends StatelessWidget {
                     ButtonC(
                       buttonText: 'Google',
                       iconPath: 'assets/images/google.png',
-                      onTap: loginUserByGoogle,
+                      onTap: registerUserByGoogle,
                     ),
                     const SizedBox(width: 20), // Adjust the spacing between buttons
                     ButtonC(
                       buttonText: 'Apple',
                       iconPath: 'assets/images/apple.png',
-                      onTap: loginUserByApple,
+                      onTap: registerUserByApple,
                     ),
                   ],
                 ),
@@ -126,7 +129,7 @@ class SignupScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           // Handle the click action here
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => LoginScreen()),
                           );

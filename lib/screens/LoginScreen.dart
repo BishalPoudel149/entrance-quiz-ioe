@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:ientrance/widgets/button_custom.dart';
 import 'package:ientrance/widgets/text_field.dart';
 
@@ -111,6 +112,35 @@ class LoginScreen extends StatelessWidget {
                         onTap: loginUserByApple,
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 20,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Handle the click action here
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignupScreen()),
+                            );
+
+                          },
+                          child: Text(
+                            'New Journey with Us ? Register Here',
+                            style: GoogleFonts.singleDay(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue, // Optional: You can set a different color for the clickable text
+                            ),
+                          ),
+                        )
+
+                      ],
+                    ),
                   ),
                 ],
               ),
