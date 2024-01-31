@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:ientrance/widgets/button_custom.dart';
 import 'package:ientrance/widgets/text_field.dart';
 
@@ -96,11 +97,51 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  //google or apple sign in
-                   ButtonC(buttonText: 'Continue with Google', iconPath: 'assets/images/google.png',onTap: loginUserByGoogle,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ButtonC(
+                        buttonText: 'Google',
+                        iconPath: 'assets/images/google.png',
+                        onTap: loginUserByGoogle,
+                      ),
+                      const SizedBox(width: 20), // Adjust the spacing between buttons
+                      ButtonC(
+                        buttonText: 'Apple',
+                        iconPath: 'assets/images/apple.png',
+                        onTap: loginUserByApple,
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 20,),
-                   ButtonC(buttonText: 'Continue with Apple', iconPath: 'assets/images/apple.png',onTap: loginUserByApple,),
-                  //not a member
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Handle the click action here
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignupScreen()),
+                            );
+
+                          },
+                          child: Text(
+                            'New Journey with Us ? Register Here',
+                            style: GoogleFonts.singleDay(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue, // Optional: You can set a different color for the clickable text
+                            ),
+                          ),
+                        )
+
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
