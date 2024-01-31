@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/OnboardingScreen.dart';
+import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
           MaterialPageRoute(builder: (_) => const OnboardingScreen()));
     } else {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => SignupScreen()));
     }
   }
 

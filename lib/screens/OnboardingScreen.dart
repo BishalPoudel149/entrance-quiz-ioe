@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
-import 'package:ientrance/screens/Signup.dart';
+import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:ientrance/utils/Onboarding_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

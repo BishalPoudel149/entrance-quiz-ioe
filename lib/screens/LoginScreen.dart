@@ -96,11 +96,22 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  //google or apple sign in
-                   ButtonC(buttonText: 'Continue with Google', iconPath: 'assets/images/google.png',onTap: loginUserByGoogle,),
-                  const SizedBox(height: 20,),
-                   ButtonC(buttonText: 'Continue with Apple', iconPath: 'assets/images/apple.png',onTap: loginUserByApple,),
-                  //not a member
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ButtonC(
+                        buttonText: 'Google',
+                        iconPath: 'assets/images/google.png',
+                        onTap: loginUserByGoogle,
+                      ),
+                      const SizedBox(width: 20), // Adjust the spacing between buttons
+                      ButtonC(
+                        buttonText: 'Apple',
+                        iconPath: 'assets/images/apple.png',
+                        onTap: loginUserByApple,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
