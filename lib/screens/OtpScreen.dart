@@ -31,9 +31,13 @@ class _OtpScreenState extends State<OtpScreen> {
         isScrollControlled: true,
         context: context,
         builder: ((context) {
-          return  Padding(
+          return  const Padding(
             padding: EdgeInsets.only(bottom: 20.0), // Adjust the top padding to position the modal
-            child: SuccessScreen(),
+            child: SuccessScreen(
+              iconPath: 'assets/images/success.png',
+              headingText: "Successfully !",
+              subHeadingText: "Congrats ! You are now a registered user.",
+            ),
           );
         })
     );

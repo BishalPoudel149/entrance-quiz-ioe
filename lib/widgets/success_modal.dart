@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key});
+  final String iconPath;
+  final String headingText ;
+  final String subHeadingText ;
+  const SuccessScreen({super.key,required this.iconPath, required this.headingText, required this.subHeadingText});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +18,19 @@ class SuccessScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/success.png',
+                iconPath,
                 height: 120,
                 width: 120,
               ),
               Text(
-                "Successfully !",
+                headingText,
                 style: GoogleFonts.singleDay(
                     fontWeight: FontWeight.bold,
                     fontSize: 45
                 ),),
               SizedBox(height: 20,),
               Text(
-                "Congrats ! You are now a registered user.",
+                subHeadingText,
                 style: GoogleFonts.singleDay(
                     color: Colors.grey.shade500,
                     fontWeight: FontWeight.normal,
