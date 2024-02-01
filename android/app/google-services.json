@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074514980996",
+    "project_id": "flutter-login-app-2024",
+    "storage_bucket": "flutter-login-app-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074514980996:android:0a47bc7b7344c129bc52d1",
+        "android_client_info": {
+          "package_name": "com.takuro.ientrance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDct4bgoRuId_4h2wyLCBUDst0VO-7Xblg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
