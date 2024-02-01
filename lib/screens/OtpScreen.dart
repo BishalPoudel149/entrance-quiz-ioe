@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ientrance/main.dart';
+
 import 'package:ientrance/widgets/button_custom.dart';
+import 'package:ientrance/widgets/success_modal.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -24,6 +26,17 @@ class _OtpScreenState extends State<OtpScreen> {
   Future<void> verifyOTP() async {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => MyHomePage(title: "Welcome")));
+    showModalBottomSheet(
+        isDismissible: true,
+        isScrollControlled: true,
+        context: context,
+        builder: ((context) {
+          return  Padding(
+            padding: EdgeInsets.only(bottom: 20.0), // Adjust the top padding to position the modal
+            child: SuccessScreen(),
+          );
+        })
+    );
   }
 
   void startResendTimer() {
