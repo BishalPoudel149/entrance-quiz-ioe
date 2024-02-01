@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ientrance/main.dart';
+import 'package:ientrance/widgets/button_custom.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -53,14 +54,34 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("You've got mail",
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-            )),
-        backgroundColor: Colors.deepPurple,
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80.0),
+        child: SafeArea(
+          child: AppBar(
+            toolbarHeight: 80.0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            title: Text("You've got mail !",
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                )),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.mail,
+                  color: Colors.white,
+                  size: 34.0,
+                ),
+                onPressed: () {},
+              ),
+            ],
+            backgroundColor: Colors.purple,
+            centerTitle: true,
+          ),
+        ),
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
@@ -76,24 +97,37 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             SizedBox(height: 20.0),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: PinCodeTextField(
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(10.6),
+                  fieldHeight: 80,
+                  fieldWidth: 80,
+                  activeFillColor: Colors.black,
+                ),
                 length: 4,
                 onCompleted: (code) => _otp = code,
-                textStyle: TextStyle(fontSize: 20.0),
+                textStyle: TextStyle(fontSize: 24.0),
                 appContext: context,
                 onChanged: (String value) {},
               ),
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: verifyOTP,
-              child: Text('Verify OTP'),
-            ),
+            ButtonC(
+                buttonText: "VERIFY",
+                buttonColor: Colors.green,
+                textColor: Colors.white,
+                onTap: verifyOTP),
+            // ElevatedButton(
+            //   onPressed: verifyOTP,
+            //   child: Text('Verify OTP'),
+            // ),
             SizedBox(height: 20.0),
             Text(
               'Resend OTP in 00:${_resendOtpCountdown.toString().padLeft(2, '0')}', // Dynamically display seconds
               style: TextStyle(
+                fontSize: 16,
                 color: Colors.grey,
               ),
             ),

@@ -190,7 +190,7 @@ class SignupScreen extends StatelessWidget {
 
   void registerUserByEmail(BuildContext context) {
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (_) => const OtpScreen()));
+        .push(MaterialPageRoute(builder: (_) => const OtpScreen()));
     print(
         "Username: ${usernameTextController.text}\n Email: ${emailTextController.text}\nPassword: ${passwordTextController.text}");
   }
