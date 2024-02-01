@@ -13,6 +13,12 @@ class SignupScreen extends StatelessWidget {
 
   void registerUserByGoogle() {}
   void registerUserByApple() {}
+  void registerUserByEmail(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const OtpScreen()));
+    print(
+        "Username: ${usernameTextController.text}\n Email: ${emailTextController.text}\nPassword: ${passwordTextController.text}");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,10 +194,5 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-  void registerUserByEmail(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => const OtpScreen()));
-    print(
-        "Username: ${usernameTextController.text}\n Email: ${emailTextController.text}\nPassword: ${passwordTextController.text}");
-  }
+
 }
