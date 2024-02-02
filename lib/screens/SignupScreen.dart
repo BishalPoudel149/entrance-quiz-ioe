@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/OtpScreen.dart';
+import 'package:ientrance/services/EmailOTPVerification.dart';
 import 'package:ientrance/widgets/button_custom.dart';
 import 'package:ientrance/widgets/text_field.dart';
+
+import '../widgets/success_modal.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
@@ -13,11 +16,44 @@ class SignupScreen extends StatelessWidget {
 
   void registerUserByGoogle() {}
   void registerUserByApple() {}
-  void registerUserByEmail(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => const OtpScreen()));
-    print(
-        "Username: ${usernameTextController.text}\n Email: ${emailTextController.text}\nPassword: ${passwordTextController.text}");
+  Future<void> registerUserByEmail(BuildContext context) async {
+    //to close keyboard when register button is clicked.
+    FocusScope.of(context).unfocus();
+    // Show loading indicator
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+    EmailOTPVerification emailVerification = EmailOTPVerification(userEmail: emailTextController.text);
+    List<dynamic> emailAndOtpStatus = await emailVerification.sendEmail(context);
+    bool isEmailSent = emailAndOtpStatus[0] as bool;
+    String otpGenerated = emailAndOtpStatus[1] as String;
+    if(isEmailSent){
+      Navigator.of(context).pop();
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => OtpScreen(generatedOTP: otpGenerated,)));
+    }
+    else{
+      showModalBottomSheet(
+          isDismissible: true,
+          isScrollControlled: true,
+          context: context,
+          builder: ((context) {
+            return  const  Padding(
+              padding: EdgeInsets.only(bottom: 20.0), // Adjust the top padding to position the modal
+              child: SuccessScreen(
+                iconPath: 'assets/images/error.png',
+                headingText: "Oops Email Stucked !",
+                subHeadingText: "Please check your Email ID once.",
+              ),
+            );
+          })
+      );
+    }
   }
   @override
   Widget build(BuildContext context) {
