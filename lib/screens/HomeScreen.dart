@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -14,78 +15,48 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Row(
+          children: [
+            // Logo and Title on the left
+            Image.asset(
+              'assets/images/logo.png', // Replace with your logo image asset path
+              width: 40,
+              height: 40,
+              // Add any additional styling or constraints as needed
+            ),
+            SizedBox(width: 8),
+            Text(
+              'IO_ Tops',
+              style: GoogleFonts.singleDay(
+                fontSize: 26,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          // Search Icon
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              // Add your search functionality here
+            },
+          ),
+          // Notification Icon
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Add your notification functionality here
+            },
+          ),
+        ],
       ),
+
       body: Column(
         children: [
-          // Welcome message
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Welcome home',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          // Play quiz with friends button
-          ElevatedButton(
-            onPressed: () {
-              // Add code here to start the quiz
-            },
-            child: Text('Play quiz together with your friends now!'),
-          ),
-          // Top collections section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Top collections',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          // List of top collections
-          Expanded(
-            child: ListView(
-              children: [
-                // Replace these with actual collection data
-                CollectionItem(title: 'Teachers'),
-                CollectionItem(title: 'Top authors'),
-                CollectionItem(title: 'Find friends'),
-              ],
-            ),
-          ),
-          // Home collection section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Home Collection',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          // List of home collection items
-          Expanded(
-            child: ListView(
-              children: [
-                // Replace these with actual collection data
-                CollectionItem(title: 'Education'),
-                CollectionItem(title: 'Play'),
-                CollectionItem(title: 'Q Q'),
-                CollectionItem(title: '+'),
-                CollectionItem(title: 'Create'),
-                CollectionItem(title: 'Show all'),
-                CollectionItem(title: 'Games'),
-                CollectionItem(title: 'Show all'),
-                CollectionItem(title: 'Profile'),
-              ],
-            ),
-          ),
+          SizedBox(height: 20,),
+          //top bar with logo and search func.
+
         ],
       ),
     );
