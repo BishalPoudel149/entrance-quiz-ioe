@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ientrance/repository/authentication_repository/authentication_repository.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -15,6 +16,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 20, top: 7),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: IconButton(
+              onPressed: () {
+                AuthenticationRepository.instance.logOut();
+              },
+              icon: Icon(Icons.logout),
+            ),
+          )
+        ],
       ),
       body: Column(
         children: [
