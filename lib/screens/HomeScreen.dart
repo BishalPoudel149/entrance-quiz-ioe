@@ -52,140 +52,147 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            Text(
-              'Welcome Home  👋',
-              style: GoogleFonts.singleDay(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              Text(
+                'Welcome Home  👋',
+                style: GoogleFonts.singleDay(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
               ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.deepPurple[100],
-                borderRadius: BorderRadius.circular(30),
+              SizedBox(
+                height: 20,
               ),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Image.asset(
-                      'assets/images/think.png',
-                      fit: BoxFit.contain,
+              Container(
+                height: 400,
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[100],
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Image.asset(
+                        'assets/images/think.png',
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Don\'t think. ',
-                            style: GoogleFonts.singleDay(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Don\'t think. ',
+                              style: GoogleFonts.singleDay(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Just Prepare',
-                            style: GoogleFonts.singleDay(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 34,
-                              color: Colors.deepPurple,
+                            Text(
+                              'Just Prepare',
+                              style: GoogleFonts.singleDay(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 34,
+                                color: Colors.deepPurple,
+                              ),
                             ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 265,
+                        ),
+                        ButtonC(
+                          buttonText: 'Explore Random Topic',
+                          onTap: randomTopic,
+                          textColor: Colors.white,
+                          buttonColor: Colors.grey.shade600,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Top Collections',
+                style: GoogleFonts.singleDay(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              Container(
+                height: 150,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Container(
+                      width: 150,
+                      margin: EdgeInsets.only(right: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Collection 1',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 265,),
-
-                      ButtonC(
-                        buttonText: 'Explore Random Topic',
-                        onTap: randomTopic,
-                        textColor: Colors.white,
-                        buttonColor: Colors.grey.shade600,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Top Collections',
-              style: GoogleFonts.singleDay(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
-            ),
-            Container(
-              height: 150,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    width: 150,
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Collection 1',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 150,
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Collection 2',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                    Container(
+                      width: 150,
+                      margin: EdgeInsets.only(right: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Collection 2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 150,
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.greenAccent,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Collection 3',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                    Container(
+                      width: 150,
+                      margin: EdgeInsets.only(right: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.greenAccent,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Collection 3',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -196,8 +203,10 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         backgroundColor: Colors.grey, // Set the background color to grey
-        selectedItemColor: Colors.blueGrey, // Set the selected item (icon and label) color to white
-        unselectedItemColor: Colors.grey, // Set the unselected item (icon and label) color to grey
+        selectedItemColor: Colors
+            .blueGrey, // Set the selected item (icon and label) color to white
+        unselectedItemColor: Colors
+            .grey, // Set the unselected item (icon and label) color to grey
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -221,7 +230,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-
     );
   }
 }
