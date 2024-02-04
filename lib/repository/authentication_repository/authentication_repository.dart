@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:ientrance/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:ientrance/screens/HomeScreen.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
+import 'package:ientrance/screens/OnboardingScreen.dart';
 import 'package:ientrance/screens/SignupScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -17,15 +19,25 @@ class AuthenticationRepository extends GetxController {
   @override
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
-
     firebaseUser.bindStream(_auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
   }
 
-  _setInitialScreen(User? user) {
-    user == null
-        ? Get.offAll(() => LoginScreen())
-        : Get.offAll(() => HomeScreen(title: "Welcome"));
+  Future<void> _setInitialScreen(User? user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool cameFromHomeScreen = prefs.getBool('cameFromHomeScreen') ?? false;
+
+    if (user == null) {
+      // User is null, check if coming from home screen
+      if (cameFromHomeScreen) {
+        Get.offAll(() => LoginScreen());
+      } else {
+        Get.offAll(() => SignupScreen());
+      }
+    } else {
+      // User is not null, set cameFromHomeScreen to true and go to home screen
+      Get.offAll(() => HomeScreen(title: "Welcome"));
+    }
   }
 
   Future<void> createUserWithEmailAndPassword(
@@ -50,6 +62,9 @@ class AuthenticationRepository extends GetxController {
       String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+      firebaseUser.value != null
+          ? Get.offAll(() => HomeScreen(title: "Welcome"))
+          : Get.to(() => LoginScreen());
     } on FirebaseAuthException catch (e) {
     } catch (_) {}
   }

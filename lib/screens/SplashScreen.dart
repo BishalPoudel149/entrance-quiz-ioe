@@ -1,11 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ientrance/screens/HomeScreen.dart';
-import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/OnboardingScreen.dart';
-import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../firebase_options.dart';
+import '../repository/authentication_repository/authentication_repository.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -34,8 +36,9 @@ class _SplashScreenState extends State<SplashScreen>
       // Navigator.of(context)
       //     .pushReplacement(MaterialPageRoute(builder: (_) => SignupScreen()));
       // below nav added for development purpose to route directly to working page.
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen(title: 'title')));
+      WidgetsFlutterBinding.ensureInitialized();
+      Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+          .then((value) => Get.put(AuthenticationRepository()));
     }
   }
 

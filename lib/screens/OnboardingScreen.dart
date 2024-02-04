@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:ientrance/utils/Onboarding_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../firebase_options.dart';
+import '../repository/authentication_repository/authentication_repository.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -103,8 +109,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //value sets to true on pressing getstarted button
 
             if (!mounted) return;
+            WidgetsFlutterBinding.ensureInitialized();
+            Firebase.initializeApp(
+                    options: DefaultFirebaseOptions.currentPlatform)
+                .then((value) => Get.put(AuthenticationRepository()));
             Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => LoginScreen()));
+                MaterialPageRoute(builder: (context) => SignupScreen()));
           },
           child: Text(
             "Get Started",
