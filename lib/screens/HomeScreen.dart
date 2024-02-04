@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ientrance/widgets/button_custom.dart';
 import 'package:ientrance/repository/authentication_repository/authentication_repository.dart';
+import 'package:ientrance/widgets/button_custom.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -43,19 +43,24 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {},
           ),
           IconButton(
-              onPressed: () {
-                AuthenticationRepository.instance.logOut();
-              },
-              icon: Icon(Icons.logout),
-            ),
-          // Top collections section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Top collections',
-              style: TextStyle(
-                fontSize: 20,
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              AuthenticationRepository.instance.logOut();
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Text(
+              'Welcome Home  👋',
+              style: GoogleFonts.singleDay(
                 fontWeight: FontWeight.bold,
+                fontSize: 30,
               ),
             ),
             SizedBox(height: 20,),
