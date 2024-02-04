@@ -86,7 +86,8 @@ class SignupScreen extends StatelessWidget {
       },
     );
     EmailOTPVerification emailVerification = EmailOTPVerification(
-        userEmail: signUpController.emailTextController.text);
+        userEmail: signUpController.emailTextController.text,
+    userName: signUpController.usernameTextController.text);
     List<dynamic> emailAndOtpStatus =
         await emailVerification.sendEmail(context);
     bool isEmailSent = emailAndOtpStatus[0] as bool;

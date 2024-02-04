@@ -155,6 +155,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 length: 4,
                 onCompleted: (code) => _otp = code,
                 textStyle: TextStyle(fontSize: 24.0),
+                keyboardType: TextInputType.number,
                 appContext: context,
                 onChanged: (String value) {
                   typedOTP = value;
