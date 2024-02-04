@@ -60,8 +60,27 @@ class SignupScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return Dialog(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text(
+                  'Loading...',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );

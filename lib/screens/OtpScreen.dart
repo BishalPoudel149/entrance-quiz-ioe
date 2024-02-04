@@ -102,6 +102,7 @@ class _OtpScreenState extends State<OtpScreen> {
         preferredSize: Size.fromHeight(80.0),
         child: SafeArea(
           child: AppBar(
+
             toolbarHeight: 80.0,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
@@ -116,13 +117,13 @@ class _OtpScreenState extends State<OtpScreen> {
               IconButton(
                 icon: Icon(
                   Icons.mail,
-                  color: Colors.white,
+                  color: Colors.yellow.shade600,
                   size: 34.0,
                 ),
                 onPressed: () {},
               ),
             ],
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.grey.shade200,
             centerTitle: true,
           ),
         ),
