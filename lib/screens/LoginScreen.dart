@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/Features/authentication/controllers/SignInController.dart';
 import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:ientrance/widgets/button_custom.dart';
 import 'package:ientrance/widgets/text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
+
+  final SignInController signInController = Get.put(SignInController());
+
   void loginUserByEmail() {
-    print("Login Button Clicked. ${emailTextController.text}");
+    signInController.registerUser(signInController.emailTextController.text,
+        signInController.passwordTextController.text);
+    print("Login Button Clicked. ${signInController.emailTextController.text}");
   }
 
   void loginUserByGoogle() {}
@@ -50,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                 CTextBox(
                   hintText: "Email Address",
                   obscureText: false,
-                  controller: emailTextController,
+                  controller: signInController.emailTextController,
                 ),
                 const SizedBox(
                   height: 20,
@@ -59,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                 CTextBox(
                   hintText: "Password",
                   obscureText: true,
-                  controller: passwordTextController,
+                  controller: signInController.passwordTextController,
                 ),
                 //forget password
                 Padding(
