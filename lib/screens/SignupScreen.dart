@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/Features/authentication/controllers/signUpController.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/OtpScreen.dart';
 import 'package:ientrance/services/EmailOTPVerification.dart';
@@ -10,13 +12,48 @@ import '../widgets/success_modal.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
-  final usernameTextController = TextEditingController();
+  final SignUpController signUpController = Get.put(SignUpController());
 
   void registerUserByGoogle() {}
   void registerUserByApple() {}
+
+// Email validation function
+  bool validateEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+// Password validation function
+  bool validatePassword(String password) {
+    // Password should contain at least one upper case, one lower case,
+    // one digit, one special character, and be at least 8 characters long
+    return RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+        .hasMatch(password);
+  }
+
   Future<void> registerUserByEmail(BuildContext context) async {
+    // Validate email and password
+    final email = signUpController.emailTextController.text;
+    final password = signUpController.passwordTextController.text;
+
+    bool isValidEmail = validateEmail(email);
+    bool isValidPassword = validatePassword(password);
+
+    if (!validateEmail(signUpController.emailTextController.text)) {
+      // Show error message for invalid email
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Invalid email address'),
+      ));
+      return;
+    }
+
+    if (!validatePassword(signUpController.passwordTextController.text)) {
+      // Show error message for invalid password
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Password Is not Strong '),
+      ));
+      return;
+    }
+
     //to close keyboard when register button is clicked.
     FocusScope.of(context).unfocus();
     // Show loading indicator
@@ -47,34 +84,37 @@ class SignupScreen extends StatelessWidget {
         );
       },
     );
-
-    EmailOTPVerification emailVerification = EmailOTPVerification(userEmail: emailTextController.text);
-    List<dynamic> emailAndOtpStatus = await emailVerification.sendEmail(context);
+    EmailOTPVerification emailVerification = EmailOTPVerification(
+        userEmail: signUpController.emailTextController.text);
+    List<dynamic> emailAndOtpStatus =
+        await emailVerification.sendEmail(context);
     bool isEmailSent = emailAndOtpStatus[0] as bool;
     String otpGenerated = emailAndOtpStatus[1] as String;
-    if(isEmailSent){
+    if (isEmailSent) {
       Navigator.of(context).pop();
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => OtpScreen(generatedOTP: otpGenerated,)));
-    }
-    else{
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => OtpScreen(
+                generatedOTP: otpGenerated,
+              )));
+    } else {
       showModalBottomSheet(
           isDismissible: true,
           isScrollControlled: true,
           context: context,
           builder: ((context) {
-            return  const  Padding(
-              padding: EdgeInsets.only(bottom: 20.0), // Adjust the top padding to position the modal
+            return const Padding(
+              padding: EdgeInsets.only(
+                  bottom: 20.0), // Adjust the top padding to position the modal
               child: SuccessScreen(
                 iconPath: 'assets/images/error.png',
                 headingText: "Oops Email Stucked !",
                 subHeadingText: "Please check your Email ID once.",
               ),
             );
-          })
-      );
+          }));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +151,7 @@ class SignupScreen extends StatelessWidget {
                 CTextBox(
                   hintText: "Username",
                   obscureText: false,
-                  controller: usernameTextController,
+                  controller: signUpController.usernameTextController,
                 ),
                 const SizedBox(
                   height: 20,
@@ -120,7 +160,7 @@ class SignupScreen extends StatelessWidget {
                 CTextBox(
                   hintText: "Email Address",
                   obscureText: false,
-                  controller: emailTextController,
+                  controller: signUpController.emailTextController,
                 ),
                 const SizedBox(
                   height: 20,
@@ -129,7 +169,7 @@ class SignupScreen extends StatelessWidget {
                 CTextBox(
                   hintText: "Password",
                   obscureText: true,
-                  controller: passwordTextController,
+                  controller: signUpController.passwordTextController,
                 ),
                 //forget password
                 // Padding(
@@ -192,22 +232,26 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ButtonC(
-                      buttonText: 'Google',
-                      iconPath: 'assets/images/google.png',
-                      onTap: registerUserByGoogle,
-                    ),
-                    const SizedBox(
-                        width: 20), // Adjust the spacing between buttons
-                    ButtonC(
-                      buttonText: 'Apple',
-                      iconPath: 'assets/images/apple.png',
-                      onTap: registerUserByApple,
-                    ),
-                  ],
+
+                SingleChildScrollView(
+                  scrollDirection:
+                      Axis.horizontal, // Allowing horizontal scrolling
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ButtonC(
+                        buttonText: 'Google',
+                        iconPath: 'assets/images/google.png',
+                        onTap: registerUserByGoogle,
+                      ),
+                      // Adjust the spacing between buttons
+                      ButtonC(
+                        buttonText: 'Apple',
+                        iconPath: 'assets/images/apple.png',
+                        onTap: registerUserByApple,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
@@ -249,6 +293,4 @@ class SignupScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:ientrance/Features/authentication/controllers/signUpController.dart';
 import 'package:ientrance/screens/HomeScreen.dart';
 
 import 'package:ientrance/widgets/button_custom.dart';
@@ -23,48 +24,50 @@ class _OtpScreenState extends State<OtpScreen> {
   Timer? _resendOtpTimer;
   String typedOTP = "";
 
-
   Future<void> sendOTP() async {}
 
   Future<void> verifyOTP() async {
-    if(typedOTP == widget.generatedOTP || typedOTP == '1234'){
-      Navigator.of(context).pop();
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => HomeScreen(title: "IO_Tops")));
+    if (typedOTP == widget.generatedOTP) {
+      SignUpController signUpController = SignUpController.instance;
+
+      signUpController.registerUser(
+          signUpController.emailTextController.text.trim(),
+          signUpController.passwordTextController.text.trim());
+
+/*      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => HomeScreen(title: "Welcome")));*/
       showModalBottomSheet(
           isDismissible: true,
           isScrollControlled: true,
           context: context,
           builder: ((context) {
-            return  const Padding(
-              padding: EdgeInsets.only(bottom: 20.0), // Adjust the top padding to position the modal
+            return const Padding(
+              padding: EdgeInsets.only(
+                  bottom: 20.0), // Adjust the top padding to position the modal
               child: SuccessScreen(
                 iconPath: 'assets/images/success.png',
                 headingText: "Successfully !",
                 subHeadingText: "Congrats ! You are now a registered user.",
               ),
             );
-          })
-      );
-    }
-    else{
+          }));
+    } else {
       showModalBottomSheet(
           isDismissible: true,
           isScrollControlled: true,
           context: context,
           builder: ((context) {
-            return  const Padding(
-              padding: EdgeInsets.only(bottom: 20.0), // Adjust the top padding to position the modal
+            return const Padding(
+              padding: EdgeInsets.only(
+                  bottom: 20.0), // Adjust the top padding to position the modal
               child: SuccessScreen(
                 iconPath: 'assets/images/error.png',
                 headingText: "Wrong OTP !",
                 subHeadingText: "Please enter valid OTP.",
               ),
             );
-          })
-      );
+          }));
     }
-
   }
 
   void startResendTimer() {
@@ -142,14 +145,13 @@ class _OtpScreenState extends State<OtpScreen> {
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: PinCodeTextField(
                 pinTheme: PinTheme(
-                  shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(10.6),
-                  fieldHeight: 80,
-                  fieldWidth: 80,
-                  activeFillColor: Colors.black,
-                  activeColor: Colors.black,
-                  inactiveColor: Colors.grey
-                ),
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(10.6),
+                    fieldHeight: 80,
+                    fieldWidth: 80,
+                    activeFillColor: Colors.black,
+                    activeColor: Colors.black,
+                    inactiveColor: Colors.grey),
                 length: 4,
                 onCompleted: (code) => _otp = code,
                 textStyle: TextStyle(fontSize: 24.0),

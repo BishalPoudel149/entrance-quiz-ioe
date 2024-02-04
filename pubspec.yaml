@@ -41,6 +41,9 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_otp_text_field: ^1.1.0+2
   pin_code_fields: ^7.4.0
+  firebase_core: ^2.25.2
+  firebase_auth: ^4.17.2
+  get: ^4.6.6
   mailer: ^6.0.1
 flutter_launcher_icons:
   android: true
