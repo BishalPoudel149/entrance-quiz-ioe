@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/Features/authentication/controllers/SignInController.dart';
 import 'package:ientrance/Features/authentication/controllers/signUpController.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/OtpScreen.dart';
@@ -117,6 +118,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignInController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -242,7 +244,7 @@ class SignupScreen extends StatelessWidget {
                       ButtonC(
                         buttonText: 'Google',
                         iconPath: 'assets/images/google.png',
-                        onTap: registerUserByGoogle,
+                        onTap: () => controller.googleSignIn(),
                       ),
                       // Adjust the spacing between buttons
                       ButtonC(

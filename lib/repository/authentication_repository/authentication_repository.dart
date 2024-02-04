@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ientrance/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:ientrance/screens/HomeScreen.dart';
 import 'package:ientrance/screens/LoginScreen.dart';
-import 'package:ientrance/screens/OnboardingScreen.dart';
 import 'package:ientrance/screens/SignupScreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -23,21 +22,10 @@ class AuthenticationRepository extends GetxController {
     ever(firebaseUser, _setInitialScreen);
   }
 
-  Future<void> _setInitialScreen(User? user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool cameFromHomeScreen = prefs.getBool('cameFromHomeScreen') ?? false;
-
-    if (user == null) {
-      // User is null, check if coming from home screen
-      if (cameFromHomeScreen) {
-        Get.offAll(() => LoginScreen());
-      } else {
-        Get.offAll(() => SignupScreen());
-      }
-    } else {
-      // User is not null, set cameFromHomeScreen to true and go to home screen
-      Get.offAll(() => HomeScreen(title: "Welcome"));
-    }
+  _setInitialScreen(User? user) {
+    user == null
+        ? Get.offAll(() => LoginScreen())
+        : Get.offAll(() => HomeScreen(title: "Welcome"));
   }
 
   Future<void> createUserWithEmailAndPassword(
@@ -69,5 +57,43 @@ class AuthenticationRepository extends GetxController {
     } catch (_) {}
   }
 
-  Future<void> logOut() async => await _auth.signOut();
+  /// Google Authentication
+  Future<UserCredential?> signInWithGoogle() async {
+    // Trigger the authentication flow
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      print('FIREBASE AUTH EXCEPTION - ${ex.message}');
+    } catch (_) {
+      const ex = SignUpWithEmailAndPasswordFailure();
+      print('FIREBASE AUTH EXCEPTION - ${ex.message}');
+      throw ex;
+    }
+  }
+
+  Future<void> logOut() async {
+    try {
+      await GoogleSignIn().signOut();
+      await FirebaseAuth.instance.signOut();
+    } on FirebaseAuthException catch (e) {
+      throw e.message!;
+    } on FormatException catch (e) {
+      throw e.message;
+    } catch (e) {
+      throw 'Unable to Logout. Try Again';
+    }
+  }
 }

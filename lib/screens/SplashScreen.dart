@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ientrance/screens/OnboardingScreen.dart';
+import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../firebase_options.dart';
@@ -30,15 +31,9 @@ class _SplashScreenState extends State<SplashScreen>
     final bool onBoardingCompleted = pref.getBool("onboarding") ?? false;
 
     if (!onBoardingCompleted) {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const OnboardingScreen()));
+      Get.offAll(() => OnboardingScreen());
     } else {
-      // Navigator.of(context)
-      //     .pushReplacement(MaterialPageRoute(builder: (_) => SignupScreen()));
-      // below nav added for development purpose to route directly to working page.
-      WidgetsFlutterBinding.ensureInitialized();
-      Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-          .then((value) => Get.put(AuthenticationRepository()));
+      Get.put(AuthenticationRepository());
     }
   }
 

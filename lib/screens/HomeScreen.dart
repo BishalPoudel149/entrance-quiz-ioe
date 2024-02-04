@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ientrance/repository/authentication_repository/authentication_repository.dart';
 import 'package:ientrance/widgets/button_custom.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -45,9 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: () async {
-              final pressed = await SharedPreferences.getInstance();
-              pressed.setBool("cameFromHomeScreen", true);
+            onPressed: () {
               AuthenticationRepository.instance.logOut();
             },
           ),
@@ -210,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
             .blueGrey, // Set the selected item (icon and label) color to white
         unselectedItemColor: Colors
             .grey, // Set the unselected item (icon and label) color to grey
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

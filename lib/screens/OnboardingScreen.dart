@@ -113,8 +113,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Firebase.initializeApp(
                     options: DefaultFirebaseOptions.currentPlatform)
                 .then((value) => Get.put(AuthenticationRepository()));
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => SignupScreen()));
           },
           child: Text(
             "Get Started",
