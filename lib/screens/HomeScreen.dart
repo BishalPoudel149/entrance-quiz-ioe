@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
             .blueGrey, // Set the selected item (icon and label) color to white
         unselectedItemColor: Colors
             .grey, // Set the unselected item (icon and label) color to grey
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

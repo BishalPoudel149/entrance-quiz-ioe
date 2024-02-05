@@ -17,10 +17,10 @@ class LoginScreen extends StatelessWidget {
     print("Login Button Clicked. ${signInController.emailTextController.text}");
   }
 
-  void loginUserByGoogle() {}
   void loginUserByApple() {}
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignInController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                       ButtonC(
                         buttonText: 'Google',
                         iconPath: 'assets/images/google.png',
-                        onTap: loginUserByGoogle,
+                        onTap: () => controller.googleSignIn(),
                       ),
                       const SizedBox(
                           width: 20), // Adjust the spacing between buttons

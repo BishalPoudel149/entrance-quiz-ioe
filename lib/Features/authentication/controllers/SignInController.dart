@@ -7,6 +7,8 @@ import '../../../repository/authentication_repository/authentication_repository.
 class SignInController extends GetxController {
   static SignInController get instance => Get.find();
 
+  final isGoogleLoading = false.obs;
+
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
@@ -14,5 +16,16 @@ class SignInController extends GetxController {
   void registerUser(String email, String password) {
     AuthenticationRepository.instance
         .signInUserWithEmailAndPassword(email, password);
+  }
+
+  ///[GoogleSignINAuthentication]
+  Future<void> googleSignIn() async {
+    try {
+      isGoogleLoading.value = true;
+      await AuthenticationRepository.instance.signInWithGoogle();
+      isGoogleLoading.value = false;
+    } catch (e) {
+      isGoogleLoading.value = false;
+    }
   }
 }

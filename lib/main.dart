@@ -5,10 +5,9 @@ import 'package:ientrance/firebase_options.dart';
 import 'package:ientrance/repository/authentication_repository/authentication_repository.dart';
 import 'package:ientrance/screens/SplashScreen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()));
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

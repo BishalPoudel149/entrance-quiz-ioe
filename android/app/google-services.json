@@ -12,7 +12,20 @@
           "package_name": "com.takuro.ientrance"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1074514980996-dbidmpbktvi020tnpprhmim433ffipjr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.takuro.ientrance",
+            "certificate_hash": "34845dcb68d675201b4dddd33e23a3df017bcc7c"
+          }
+        },
+        {
+          "client_id": "1074514980996-58bdkrh62a9d8bav4pk3pb7lvsqm26j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDct4bgoRuId_4h2wyLCBUDst0VO-7Xblg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074514980996-58bdkrh62a9d8bav4pk3pb7lvsqm26j3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1074514980996-erpig4ijugn0tb9m05h35mla5bh2kup7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.takuro.ientrance.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
