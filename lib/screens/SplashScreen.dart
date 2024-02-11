@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ientrance/screens/LoginScreen.dart';
 import 'package:ientrance/screens/OnboardingScreen.dart';
 import 'package:ientrance/screens/SignupScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,9 +32,15 @@ class _SplashScreenState extends State<SplashScreen>
     final bool onBoardingCompleted = pref.getBool("onboarding") ?? false;
 
     if (!onBoardingCompleted) {
-      Get.offAll(() => OnboardingScreen());
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => OnboardingScreen()),
+      );
     } else {
-      Get.put(AuthenticationRepository());
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SignupScreen()),
+      );
     }
   }
 

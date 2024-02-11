@@ -109,10 +109,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //value sets to true on pressing getstarted button
 
             if (!mounted) return;
-            WidgetsFlutterBinding.ensureInitialized();
-            Firebase.initializeApp(
-                    options: DefaultFirebaseOptions.currentPlatform)
-                .then((value) => Get.put(AuthenticationRepository()));
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => SignupScreen()),
+            );
           },
           child: Text(
             "Get Started",
