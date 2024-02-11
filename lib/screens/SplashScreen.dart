@@ -12,7 +12,7 @@ import '../firebase_options.dart';
 import '../repository/authentication_repository/authentication_repository.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -35,13 +35,24 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => OnboardingScreen()),
-      );
+      ).then((_) {
+        // Initialize repository after navigation
+        initializeRepository();
+      });
     } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SignupScreen()),
-      );
+      ).then((_) {
+        // Initialize repository after navigation
+        initializeRepository();
+      });
     }
+  }
+
+  void initializeRepository() {
+    // Initialize the repository after navigation
+    Get.put(AuthenticationRepository());
   }
 
   @override
